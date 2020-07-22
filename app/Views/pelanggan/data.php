@@ -34,7 +34,8 @@
                             <th>JK</th>
                             <th>No. Handphone</th>
                             <th>Alamat</th>
-                            <th width="25%">Aksi</th>
+                            <th>Username</th>
+                            <th width="15%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,7 @@
                                 <td><?= $data['jenis_kelamin'] ?></td>
                                 <td><?= $data['no_hp'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
+                                <td><?= $data['username'] ?></td>
                                 <td class="text-center">
                                     <a href="/pelanggan/edit/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-primary">Ubah</a>
                                     <a href="/pelanggan/delete/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
