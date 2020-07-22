@@ -6,7 +6,7 @@
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-tv"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-database"></i> Data Master</a></li>
         <li class="active">Kategori</li>
     </ol>
 </section>
