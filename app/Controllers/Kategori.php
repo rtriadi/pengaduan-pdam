@@ -27,8 +27,8 @@ class Kategori extends BaseController
             'nama_kategori' => [
                 'rules' => 'required|is_unique[kategori.nama_kategori]',
                 'errors' => [
-                    'required' => 'nama bangunan harus diisi.',
-                    'is_unique' => 'nama bangunan sudah terdaftar.'
+                    'required' => '{field} harus diisi.',
+                    'is_unique' => '{field} sudah terdaftar.'
                 ]
             ]
         ])) {
