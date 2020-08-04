@@ -82,6 +82,22 @@
                             <?php endforeach ?>
                         </tbody>
                     </table>
+                    <!-- <div> -->
+                    <?php
+
+                    /* use Endroid\QrCode\QrCode; */
+
+                    /*                         $qrCode = new QrCode('Life is too short to be generating QR codes');
+
+                        header('Content-Type: ' . $qrCode->getContentType());
+                        echo $qrCode->writeString(); */
+
+                    /*  $qrCode = new Endroid\QrCode\QrCode('A001');
+                        $qrCode->writeFile('uploads/item-A001.png'); */
+                    ?>
+                    <!-- <img src="/uploads/item-A001.png" style="width: 200px">
+                        <br> -->
+                    <!-- </div> -->
                 </div>
                 <!-- /.box-body -->
             </div>

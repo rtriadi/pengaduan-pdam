@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\KategoriModel;
+use Endroid\QrCode\QrCode;
 
 class Kategori extends BaseController
 {
@@ -16,7 +17,7 @@ class Kategori extends BaseController
         $data = [
             'title' => 'Data Kategori',
             'validation' => \Config\Services::validation(),
-            'kategori' => $this->kategoriModel->get()
+            'kategori' => $this->kategoriModel->get(),
         ];
         return view('kategori/data', $data);
     }

@@ -13,27 +13,34 @@ class Auth extends BaseController
 
     public function login()
     {
+        if (session()->has('isLoggedIn')) {
+            return redirect()->to('/home');
+        }
         if ($this->request->getPost()) {
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
             $user = $this->authModel->getUser($username);
-            /* dd($user); */
-            if ($user) {
-                if ($user->password_petugas !== sha1($password)) {
-                    session()->setFlashdata('pesan', 'Password salah.');
-                    return redirect()->to('/auth/login');
+            if ($user->level == 0) {
+                if ($user) {
+                    if ($user->password_petugas !== sha1($password)) {
+                        session()->setFlashdata('pesan', 'Password salah.');
+                        return redirect()->to('/auth/login');
+                    } else {
+                        $sessData = [
+                            'id_petugas' => $user->id_petugas,
+                            'username_petugas' => $user->username_petugas,
+                            'nama_lengkap_petugas' => $user->nama_lengkap_petugas,
+                            'isLoggedIn' => true
+                        ];
+                        session()->set($sessData);
+                        return redirect()->to('/home');
+                    }
                 } else {
-                    $sessData = [
-                        'id_petugas' => $user->id_petugas,
-                        'username_petugas' => $user->username_petugas,
-                        'nama_lengkap_petugas' => $user->nama_lengkap_petugas,
-                        'isLoggedIn' => true
-                    ];
-                    session()->set($sessData);
-                    return redirect()->to('/home');
+                    session()->setFlashdata('pesan', 'Username tidak terdaftar.');
+                    return redirect()->to('/auth/login');
                 }
             } else {
-                session()->setFlashdata('pesan', 'Username tidak terdaftar.');
+                session()->setFlashdata('pesan', 'Anda bukan administrator.');
                 return redirect()->to('/auth/login');
             }
         } else {
