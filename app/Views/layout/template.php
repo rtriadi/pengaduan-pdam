@@ -223,7 +223,7 @@ desired effect
     <!-- page script -->
     <script>
         $(function() {
-            $('#tabel-kategori, #tabel-pelanggan, #tabel-petugas, #tabel-pengaduan').DataTable()
+            $('#tabel-kategori, #tabel-pelanggan, #tabel-meterpelanggan, #tabel-petugas, #tabel-pengaduan').DataTable()
             $('#example1').DataTable({
                 'paging': true,
                 'lengthChange': false,
