@@ -32,13 +32,13 @@ class Petugas extends BaseController
     public function save()
     {
         if (!$this->validate([
-            'username_petugas' => [
+            'username' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
                 ]
             ],
-            'password_petugas' => [
+            'password' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -79,8 +79,8 @@ class Petugas extends BaseController
         }
 
         $this->petugasModel->save([
-            'username_petugas' => $this->request->getVar('username_petugas'),
-            'password_petugas' => sha1($this->request->getVar('password_petugas')),
+            'username' => $this->request->getVar('username'),
+            'password' => sha1($this->request->getVar('password')),
             'level' => $this->request->getVar('level'),
             'nama_lengkap_petugas' => $this->request->getVar('nama_lengkap_petugas'),
             'jenis_kelamin_petugas' => $this->request->getVar('jenis_kelamin_petugas'),
@@ -105,13 +105,13 @@ class Petugas extends BaseController
     {
         $id_petugas = $this->request->getVar('id_petugas');
         if (!$this->validate([
-            'username_petugas' => [
+            'username' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
                 ]
             ],
-            'password_petugas' => [
+            'password' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -153,8 +153,8 @@ class Petugas extends BaseController
 
         $this->petugasModel->save([
             'id_petugas' => $id_petugas,
-            'username_petugas' => $this->request->getVar('username_petugas'),
-            'password_petugas' => sha1($this->request->getVar('password_petugas')),
+            'username' => $this->request->getVar('username'),
+            'password' => sha1($this->request->getVar('password')),
             'level' => $this->request->getVar('level'),
             'nama_lengkap_petugas' => $this->request->getVar('nama_lengkap_petugas'),
             'jenis_kelamin_petugas' => $this->request->getVar('jenis_kelamin_petugas'),

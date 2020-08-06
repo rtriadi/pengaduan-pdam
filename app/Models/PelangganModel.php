@@ -9,7 +9,7 @@ class PelangganModel extends Model
     protected $table = 'pelanggan';
     protected $primaryKey = 'id_pelanggan';
     protected $useTimestamps = true;
-    protected $allowedFields = ['username', 'password', 'nama_lengkap', 'jenis_kelamin', 'no_hp', 'alamat'];
+    protected $allowedFields = ['no_sambung', 'nama_lengkap', 'jenis_kelamin', 'no_hp', 'alamat'];
 
     public function get($id_pelanggan = false)
     {

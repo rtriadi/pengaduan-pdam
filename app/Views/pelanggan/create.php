@@ -25,15 +25,10 @@
                 <div class="box-body">
                     <form role="form" action="/pelanggan/save" method="post">
                         <?= csrf_field() ?>
-                        <div class="form-group <?= ($validation->hasError('username') ? 'has-error' : '') ?>">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= old('username') ?>">
-                            <span class="help-block"><?= $validation->getError('username') ?></span>
-                        </div>
-                        <div class="form-group <?= ($validation->hasError('password') ? 'has-error' : '') ?>">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<?= old('password') ?>">
-                            <span class="help-block"><?= $validation->getError('password') ?></span>
+                        <div class="form-group <?= ($validation->hasError('no_sambung') ? 'has-error' : '') ?>">
+                            <label for="no_sambung">No. Sambung</label>
+                            <input type="text" class="form-control" id="no_sambung" name="no_sambung" placeholder="No. Sambung" value="<?= old('no_sambung') ?>">
+                            <span class="help-block"><?= $validation->getError('no_sambung') ?></span>
                         </div>
                         <div class="form-group <?= ($validation->hasError('nama_lengkap') ? 'has-error' : '') ?>">
                             <label for="nama_lengkap">Nama Lengkap</label>

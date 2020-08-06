@@ -25,16 +25,16 @@
                 <div class="box-body">
                     <form role="form" action="/petugas/update" method="post">
                         <?= csrf_field() ?>
-                        <div class="form-group <?= ($validation->hasError('username_petugas') ? 'has-error' : '') ?>">
+                        <div class="form-group <?= ($validation->hasError('username') ? 'has-error' : '') ?>">
                             <input type="hidden" class="form-control" name="id_petugas" value="<?= $petugas['id_petugas'] ?>">
-                            <label for="username_petugas">Username</label>
-                            <input type="text" class="form-control" id="username_petugas" name="username_petugas" placeholder="Username" value="<?= (old('username_petugas')) ? old('username_petugas') : $petugas['username_petugas'] ?>">
-                            <span class="help-block"><?= $validation->getError('username_petugas') ?></span>
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?= (old('username')) ? old('username') : $petugas['username'] ?>">
+                            <span class="help-block"><?= $validation->getError('username') ?></span>
                         </div>
-                        <div class="form-group <?= ($validation->hasError('password_petugas') ? 'has-error' : '') ?>">
-                            <label for="password_petugas">Password</label>
-                            <input type="password" class="form-control" id="password_petugas" name="password_petugas" placeholder="Password" value="<?= (old('password_petugas')) ? old('password_petugas') : $petugas['password_petugas'] ?>">
-                            <span class="help-block"><?= $validation->getError('password_petugas') ?></span>
+                        <div class="form-group <?= ($validation->hasError('password') ? 'has-error' : '') ?>">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<?= (old('password')) ? old('password') : $petugas['password'] ?>">
+                            <span class="help-block"><?= $validation->getError('password') ?></span>
                         </div>
                         <div class="form-group <?= ($validation->hasError('level') ? 'has-error' : '') ?>">
                             <label for="level">Level</label>

@@ -15,11 +15,11 @@ class Petugas extends Migration
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE,
 			],
-			'username_petugas' => [
+			'username' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'password_petugas' => [
+			'password' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],

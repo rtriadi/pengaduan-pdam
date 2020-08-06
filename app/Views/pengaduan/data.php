@@ -2,12 +2,11 @@
 <?= $this->section('content') ?>
 <section class="content-header">
     <h1>
-        Pelanggan
+        Pengaduan
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-database"></i> Data Master</a></li>
-        <li class="active">Pelanggan</li>
+        <li class="active"><i class="fa fa-commenting"></i> Pengaduan</li>
     </ol>
 </section>
 
@@ -17,7 +16,6 @@
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title"><?= $title ?></h3>
-                <a href="/pelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -26,32 +24,43 @@
                         <?= session()->getFlashdata('pesan') ?>
                     </div>
                 <?php endif ?>
-                <table id="tabel-pelanggan" class="table table-bordered table-striped">
+                <table id="tabel-pengaduan" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th width="5%">No.</th>
+                            <th>Tanggal</th>
+                            <th>Nama</th>
                             <th>No. Sambung</th>
-                            <th>Nama Lengkap</th>
-                            <th>JK</th>
-                            <th>No. Handphone</th>
                             <th>Alamat</th>
-                            <th width="15%">Aksi</th>
+                            <th>Pengaduan</th>
+                            <th>Penyelesaian Pengaduan</th>
+                            <th width="5%">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($pelanggan as $data) : ?>
+                        helper('Tanggal');
+                        foreach ($pengaduan as $data) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td><?= $data['no_sambung'] ?></td>
+                                <td><?= $data['created_at'] ?></td>
                                 <td><?= $data['nama_lengkap'] ?></td>
-                                <td><?= $data['jenis_kelamin'] ?></td>
-                                <td><?= $data['no_hp'] ?></td>
+                                <td><?= $data['no_sambung'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
-                                <td class="text-center">
-                                    <a href="/pelanggan/edit/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-primary">Ubah</a>
-                                    <a href="/pelanggan/delete/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
+                                <td>
+                                    <?php
+                                    $this->db = \Config\Database::connect();
+                                    $query = $this->db->table('kategori')
+                                        ->whereIn('id_kategori', explode(",", $data['pengaduan']))
+                                        ->get()
+                                        ->getResultArray();
+                                    foreach ($query as $key) {
+                                        echo '- ' . $key['nama_kategori'] . '<br>';
+                                    }
+                                    ?>
                                 </td>
+                                <td><?= $data['penyelesaian_pengaduan'] ?></td>
+                                <td><?= $data['status'] == 0 ? '<label class="label label-danger">Belum Selesai</label>' : '<label class="label label-success">Selesai</label>' ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

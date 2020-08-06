@@ -4,35 +4,29 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Pelanggan extends Migration
+class MeterPelanggan extends Migration
 {
 	public function up()
 	{
 		$this->forge->addField([
-			'id_pelanggan' => [
+			'id' => [
 				'type' => 'INT',
 				'constraint' => 11,
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE,
 			],
-			'no_sambung' => [
+			'tanggal_meter' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'nama_lengkap' => [
+			'meter' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'jenis_kelamin' => [
-				'type' => 'CHAR',
-				'constraint' => 1,
-			],
-			'no_hp' => [
-				'type' => 'CHAR',
-				'constraint' => 15,
-			],
-			'alamat' => [
-				'type' => 'TEXT',
+			'id_pelanggan' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => TRUE,
 			],
 			'created_at' => [
 				'type' => 'DATETIME',
@@ -42,14 +36,15 @@ class Pelanggan extends Migration
 				'null' => TRUE,
 			],
 		]);
-		$this->forge->addKey('id_pelanggan', TRUE);
-		$this->forge->createTable('pelanggan');
+		$this->forge->addKey('id', TRUE);
+		$this->forge->addForeignKey('id_pelanggan', 'pelanggan', 'id_pelanggan', 'cascade', 'cascade');
+		$this->forge->createTable('meter_pelanggan');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('pelanggan');
+		$this->forge->dropTable('meter_pelanggan');
 	}
 }

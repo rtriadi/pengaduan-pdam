@@ -48,7 +48,7 @@
                                 <td><?= $data['jenis_kelamin_petugas'] ?></td>
                                 <td><?= $data['no_hp_petugas'] ?></td>
                                 <td><?= $data['alamat_petugas'] ?></td>
-                                <td><?= $data['username_petugas'] ?></td>
+                                <td><?= $data['username'] ?></td>
                                 <td><?= $data['level'] == '0' ? '<label class="label label-success">Administrator</label>' : '<label class="label label-default">Petugas</label>' ?></td>
                                 <td class="text-center">
                                     <a href="/petugas/edit/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-primary">Ubah</a>

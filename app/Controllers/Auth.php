@@ -22,13 +22,13 @@ class Auth extends BaseController
             $user = $this->authModel->getUser($username);
             if ($user->level == 0) {
                 if ($user) {
-                    if ($user->password_petugas !== sha1($password)) {
+                    if ($user->password !== sha1($password)) {
                         session()->setFlashdata('pesan', 'Password salah.');
                         return redirect()->to('/auth/login');
                     } else {
                         $sessData = [
                             'id_petugas' => $user->id_petugas,
-                            'username_petugas' => $user->username_petugas,
+                            'username' => $user->username,
                             'nama_lengkap_petugas' => $user->nama_lengkap_petugas,
                             'isLoggedIn' => true
                         ];

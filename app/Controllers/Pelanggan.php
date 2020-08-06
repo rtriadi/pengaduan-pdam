@@ -32,13 +32,7 @@ class Pelanggan extends BaseController
     public function save()
     {
         if (!$this->validate([
-            'username' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi.',
-                ]
-            ],
-            'password' => [
+            'no_sambung' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -73,8 +67,7 @@ class Pelanggan extends BaseController
         }
 
         $this->pelangganModel->save([
-            'username' => $this->request->getVar('username'),
-            'password' => sha1($this->request->getVar('password')),
+            'no_sambung' => $this->request->getVar('no_sambung'),
             'nama_lengkap' => $this->request->getVar('nama_lengkap'),
             'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
             'no_hp' => $this->request->getVar('no_hp'),
@@ -98,13 +91,7 @@ class Pelanggan extends BaseController
     {
         $id_pelanggan = $this->request->getVar('id_pelanggan');
         if (!$this->validate([
-            'username' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => '{field} harus diisi.',
-                ]
-            ],
-            'password' => [
+            'no_sambung' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -140,8 +127,7 @@ class Pelanggan extends BaseController
 
         $this->pelangganModel->save([
             'id_pelanggan' => $id_pelanggan,
-            'username' => $this->request->getVar('username'),
-            'password' => sha1($this->request->getVar('password')),
+            'no_sambung' => $this->request->getVar('no_sambung'),
             'nama_lengkap' => $this->request->getVar('nama_lengkap'),
             'jenis_kelamin' => $this->request->getVar('jenis_kelamin'),
             'no_hp' => $this->request->getVar('no_hp'),
