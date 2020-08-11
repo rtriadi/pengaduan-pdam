@@ -20,7 +20,7 @@
                 <a href="/meterpelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body table-responsive">
                 <?php if (session()->getFlashdata('pesan')) : ?>
                     <div class="alert alert-success" role="alert">
                         <?= session()->getFlashdata('pesan') ?>

@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 class Validation
 {
@@ -33,4 +35,16 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+
+	public $import = [
+		'fileexcel' => 'uploaded[fileexcel]|ext_in[fileexcel,xls,xlsx]|max_size[fileexcel,1000]',
+	];
+
+	public $import_errors = [
+		'fileexcel' => [
+			'ext_in'    => 'File Excel hanya boleh diisi dengan xls atau xlsx.',
+			'max_size'  => 'File Excel maksimal 1mb',
+			'uploaded'  => 'File Excel wajib diisi'
+		]
+	];
 }

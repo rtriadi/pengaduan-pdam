@@ -7,7 +7,8 @@
 	"require": {
 		"php": ">=7.2",
 		"codeigniter4/framework": "^4",
-		"endroid/qr-code": "^3.9"
+		"endroid/qr-code": "^3.9",
+		"phpoffice/phpspreadsheet": "^1.14"
 	},
 	"require-dev": {
 		"fzaninotto/faker": "^1.9@dev",

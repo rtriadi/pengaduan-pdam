@@ -20,7 +20,7 @@
                     <h3 class="box-title"><?= $title ?></h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body table-responsive">
                     <?php if (session()->getFlashdata('pesan')) : ?>
                         <div class="alert alert-success" role="alert">
                             <?= session()->getFlashdata('pesan') ?>

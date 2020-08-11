@@ -2,7 +2,7 @@
 <li class="header">MENU UTAMA</li>
 <!-- Optionally, you can add icons to the links -->
 <li class="<?= $this->uri->getSegment(1) == 'home' ? 'active' : '' ?>"><a href="/home"><i class="fa fa-tv"></i> <span>Home</span></a></li>
-<li class="<?= $this->uri->getSegment(1) == 'pengaduan' ? 'active' : '' ?>"><a href="/pengaduan"><i class="fa fa-commenting"></i> <span>Daftar Pengaduan</span></a></li>
+<li class="<?= $this->uri->getSegment(1) == 'pengaduan' ? 'active' : '' ?>"><a href="/pengaduan"><i class="fa fa-commenting"></i> <span>Pengaduan</span></a></li>
 <li class="header">MENU PENGATURAN</li>
 <li class="treeview <?= $this->uri->getSegment(1) == 'pelanggan' || $this->uri->getSegment(1) == 'meterpelanggan' || $this->uri->getSegment(1) == 'petugas' || $this->uri->getSegment(1) == 'kategori' ? 'active' : '' ?>">
     <a href="#"><i class="fa fa-database"></i> <span>Data Master</span>

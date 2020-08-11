@@ -18,4 +18,17 @@ class PelangganModel extends Model
         }
         return $this->where(['id_pelanggan' => $id_pelanggan])->first();
     }
+
+    public function edit($data)
+    {
+        return $this->db->table('pelanggan')
+            ->set($data)
+            ->where(['no_sambung' => $data['no_sambung']])
+            ->update();
+    }
+
+    public function cekNoSambung($no_sambung)
+    {
+        return $this->db->table('pelanggan')->Where(['no_sambung' => $no_sambung])->get()->getResultArray();
+    }
 }
