@@ -29,8 +29,8 @@
                         <tr>
                             <th width="5%">No.</th>
                             <th>Tanggal</th>
-                            <th>Nama</th>
                             <th>No. Sambung</th>
+                            <th>Nama</th>
                             <th>Alamat</th>
                             <th>Pengaduan</th>
                             <th>Penyelesaian Pengaduan</th>
@@ -44,8 +44,8 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $data['created_at'] ?></td>
-                                <td><?= $data['nama_lengkap'] ?></td>
                                 <td><?= $data['no_sambung'] ?></td>
+                                <td><?= $data['nama'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
                                 <td>
                                     <?php
@@ -59,7 +59,20 @@
                                     }
                                     ?>
                                 </td>
-                                <td><?= $data['penyelesaian_pengaduan'] ?></td>
+                                <td>
+                                    <?php if ($data['penyelesaian_pengaduan'] == null) : ?>
+                                        <div>
+                                            <?php
+                                            $qrCode = new Endroid\QrCode\QrCode($data['id_pengaduan']);
+                                            $qrCode->writeFile('uploads/pengaduan/pengaduan-' . $data['id_pengaduan'] . '.png');
+                                            ?>
+                                            <img src="/uploads/pengaduan/pengaduan-<?= $data['id_pengaduan'] ?>.png" style="width: 100px">
+                                            <br>
+                                        </div>
+                                    <?php else : $data['penyelesaian_pengaduan'] ?>
+
+                                    <?php endif ?>
+                                </td>
                                 <td><?= $data['status'] == 0 ? '<label class="label label-danger">Belum Selesai</label>' : '<label class="label label-success">Selesai</label>' ?></td>
                             </tr>
                         <?php endforeach ?>
