@@ -15,10 +15,16 @@ class Pengaduan extends Migration
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE,
 			],
-			'id_pelanggan' => [
-				'type' => 'INT',
-				'constraint' => 11,
-				'unsigned' => TRUE,
+			'no_sambung' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+			],
+			'nama' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+			],
+			'alamat' => [
+				'type' => 'TEXT',
 			],
 			'pengaduan' => [
 				'type' => 'VARCHAR',
@@ -47,7 +53,6 @@ class Pengaduan extends Migration
 			],
 		]);
 		$this->forge->addKey('id_pengaduan', TRUE);
-		$this->forge->addForeignKey('id_pelanggan', 'pelanggan', 'id_pelanggan', 'cascade', 'cascade');
 		$this->forge->createTable('pengaduan');
 	}
 

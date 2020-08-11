@@ -92,8 +92,6 @@ class Pelanggan extends BaseController
 
                     if ($updates) {
                         $update++;
-                        /* session()->setFlashdata('pesan', 'Imported successfully');
-                        return redirect()->to(base_url('pelanggan')); */
                     }
                 } else {
                     $data = [
@@ -108,8 +106,6 @@ class Pelanggan extends BaseController
 
                     if ($inserts) {
                         $insert++;
-                        /* session()->setFlashdata('pesan', 'Imported successfully');
-                        return redirect()->to(base_url('pelanggan')); */
                     }
                 }
             }

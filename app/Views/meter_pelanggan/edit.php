@@ -36,15 +36,15 @@
                             <input type="date" class="form-control" id="tanggal_meter" name="tanggal_meter" value="<?= (old('tanggal_meter')) ? old('tanggal_meter') : $meter_pelanggan['tanggal_meter'] ?>">
                             <span class="help-block"><?= $validation->getError('tanggal_meter') ?></span>
                         </div>
-                        <div class="form-group <?= ($validation->hasError('id_pelanggan') ? 'has-error' : '') ?>">
-                            <label for="id_pelanggan">Pelanggan</label>
-                            <select class="form-control" id="id_pelanggan" name="id_pelanggan">
+                        <div class="form-group <?= ($validation->hasError('no_sambung') ? 'has-error' : '') ?>">
+                            <label for="no_sambung">Pelanggan</label>
+                            <select class="form-control" id="no_sambung" name="no_sambung">
                                 <option value="">[Pilih Pelanggan]</option>
                                 <?php foreach ($pelanggan as $key) : ?>
-                                    <option value="<?= $key['id_pelanggan'] ?>" <?= $meter_pelanggan['id_pelanggan'] == $key['id_pelanggan'] ? 'selected' : '' ?>><?= $key['nama_lengkap'] ?></option>
+                                    <option value="<?= $key['no_sambung'] ?>" <?= $meter_pelanggan['no_sambung'] == $key['no_sambung'] ? 'selected' : '' ?>><?= $key['no_sambung'] . ' - ' . $key['nama_lengkap'] ?></option>
                                 <?php endforeach ?>
                             </select>
-                            <span class="help-block"><?= $validation->getError('id_pelanggan') ?></span>
+                            <span class="help-block"><?= $validation->getError('no_sambung') ?></span>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>

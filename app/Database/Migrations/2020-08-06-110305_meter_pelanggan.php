@@ -16,17 +16,15 @@ class MeterPelanggan extends Migration
 				'auto_increment' => TRUE,
 			],
 			'tanggal_meter' => [
-				'type' => 'VARCHAR',
-				'constraint' => 255,
+				'type' => 'DATE',
 			],
 			'meter' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
-			'id_pelanggan' => [
-				'type' => 'INT',
-				'constraint' => 11,
-				'unsigned' => TRUE,
+			'no_sambung' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
 			],
 			'created_at' => [
 				'type' => 'DATETIME',
@@ -37,7 +35,6 @@ class MeterPelanggan extends Migration
 			],
 		]);
 		$this->forge->addKey('id', TRUE);
-		$this->forge->addForeignKey('id_pelanggan', 'pelanggan', 'id_pelanggan', 'cascade', 'cascade');
 		$this->forge->createTable('meter_pelanggan');
 	}
 

@@ -86,7 +86,7 @@ desired effect
                                 <!-- The user image in the navbar-->
                                 <img src="/assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs"><?= session()->get('username_petugas') ?></span>
+                                <span class="hidden-xs"><?= session()->get('nama_lengkap_petugas') ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -94,8 +94,8 @@ desired effect
                                     <img src="/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        <?= session()->get('nama_lengkap_petugas') ?>
-                                        <small>Administrator</small>
+                                        <?= session()->get('username') ?>
+                                        <small><?= session()->get('level') == 0 ? 'Administrator' : 'Pimpinan' ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -126,7 +126,7 @@ desired effect
                         <img src="/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?= session()->get('username_petugas') ?></p>
+                        <p><?= session()->get('nama_lengkap_petugas') ?></p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>

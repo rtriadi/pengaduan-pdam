@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\MeterPelangganModel;
 use App\Models\PelangganModel;
 
@@ -22,11 +24,96 @@ class MeterPelanggan extends BaseController
         return view('meter_pelanggan/data', $data);
     }
 
+    public function importExcel()
+    {
+
+        $insert = 0;
+        $update = 0;
+
+        $validation =  \Config\Services::validation();
+
+        $file = $this->request->getFile('fileexcel');
+
+        $data = array(
+            'fileexcel' => $file,
+        );
+
+        if ($validation->run($data, 'import') == FALSE) {
+
+            session()->setFlashdata('errors', $validation->getErrors());
+            return redirect()->to(base_url('meterpelanggan'));
+        } else {
+
+            // ambil extension dari file excel
+            $extension = $file->getClientExtension();
+
+            // format excel 2007 ke bawah
+            if ('xls' == $extension) {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                // format excel 2010 ke atas
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+
+            $spreadsheet = $reader->load($file);
+            $allDataInSheet = $spreadsheet->getActiveSheet()->toArray();
+            $flag = true;
+
+            $i = 0;
+            foreach ($allDataInSheet as $value) {
+
+                // lewati baris ke 0 pada file excel
+                // dalam kasus ini, array ke 0 adalahpara title
+                if ($flag) {
+                    $flag = false;
+                    continue;
+                }
+
+                // get no_sambung from excel
+                $inserdata[$i]['tanggal_meter'] = $value[0];
+                $inserdata[$i]['meter'] = $value[1];
+                $inserdata[$i]['no_sambung'] = $value[2];
+                $i++;
+            }
+
+            foreach ($inserdata as $dt) {
+                $cek = $this->meterPelangganModel->cekNoSambung($dt['tanggal_meter'], $dt['no_sambung']);
+                if (count($cek) > 0) {
+                    $data = [
+                        "tanggal_meter" => $dt['tanggal_meter'],
+                        "meter" => $dt['meter'],
+                        "no_sambung" => $dt['no_sambung']
+                    ];
+
+                    $updates = $this->meterPelangganModel->edit($data);
+
+                    if ($updates) {
+                        $update++;
+                    }
+                } else {
+                    $data = [
+                        "tanggal_meter" => $dt['tanggal_meter'],
+                        "meter" => $dt['meter'],
+                        "no_sambung" => $dt['no_sambung']
+                    ];
+
+                    $inserts = $this->meterPelangganModel->insert($data);
+
+                    if ($inserts) {
+                        $insert++;
+                    }
+                }
+            }
+            session()->setFlashdata('pesan', 'Insert = ' . $insert . ' Update = ' . $update);
+            return redirect()->to(base_url('meterpelanggan'));
+        }
+    }
+
     public function create()
     {
         $data = [
             'title' => 'Form Tambah Data',
-            'pelanggan' => $this->pelangganModel->get(),
+            'pelanggan' => $this->meterPelangganModel->get(),
             'validation' => \Config\Services::validation()
         ];
         return view('meter_pelanggan/create', $data);
@@ -47,7 +134,7 @@ class MeterPelanggan extends BaseController
                     'required' => '{field} harus diisi.',
                 ]
             ],
-            'id_pelanggan' => [
+            'no_sambung' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -60,7 +147,7 @@ class MeterPelanggan extends BaseController
         $this->meterPelangganModel->save([
             'tanggal_meter' => $this->request->getVar('tanggal_meter'),
             'meter' => $this->request->getVar('meter'),
-            'id_pelanggan' => $this->request->getVar('id_pelanggan')
+            'no_sambung' => $this->request->getVar('no_sambung')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
         return redirect()->to('/meterpelanggan');
@@ -71,7 +158,7 @@ class MeterPelanggan extends BaseController
         $data = [
             'title' => 'Form Ubah Data',
             'meter_pelanggan' => $this->meterPelangganModel->get($id),
-            'pelanggan' => $this->pelangganModel->get(),
+            'pelanggan' => $this->meterPelangganModel->get(),
             'validation' => \Config\Services::validation(),
         ];
         return view('meter_pelanggan/edit', $data);
@@ -79,7 +166,7 @@ class MeterPelanggan extends BaseController
 
     public function update()
     {
-        $id = $this->request->getVar('id_pelanggan');
+        $id = $this->request->getVar('id');
         if (!$this->validate([
             'tanggal_meter' => [
                 'rules' => 'required',
@@ -93,7 +180,7 @@ class MeterPelanggan extends BaseController
                     'required' => '{field} harus diisi.',
                 ]
             ],
-            'id_pelanggan' => [
+            'no_sambung' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -107,7 +194,7 @@ class MeterPelanggan extends BaseController
             'id' => $id,
             'tanggal_meter' => $this->request->getVar('tanggal_meter'),
             'meter' => $this->request->getVar('meter'),
-            'id_pelanggan' => $this->request->getVar('id_pelanggan')
+            'no_sambung' => $this->request->getVar('no_sambung')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
         return redirect()->to('/meterpelanggan');

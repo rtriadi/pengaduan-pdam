@@ -35,15 +35,15 @@
                             <input type="text" class="form-control" id="meter" name="meter" placeholder="Meter" value="<?= old('meter') ?>">
                             <span class="help-block"><?= $validation->getError('meter') ?></span>
                         </div>
-                        <div class="form-group <?= ($validation->hasError('id_pelanggan') ? 'has-error' : '') ?>">
-                            <label for="id_pelanggan">Pelanggan</label>
-                            <select class="form-control" id="id_pelanggan" name="id_pelanggan">
+                        <div class="form-group <?= ($validation->hasError('no_sambung') ? 'has-error' : '') ?>">
+                            <label for="no_sambung">Pelanggan</label>
+                            <select class="form-control" id="no_sambung" name="no_sambung">
                                 <option value="">[Pilih Pelanggan]</option>
                                 <?php foreach ($pelanggan as $key) : ?>
-                                    <option value="<?= $key['id_pelanggan'] ?>" <?= old('id_pelanggan') == $key['id_pelanggan'] ? 'selected' : '' ?>><?= $key['nama_lengkap'] ?></option>
+                                    <option value="<?= $key['no_sambung'] ?>" <?= old('no_sambung') == $key['no_sambung'] ? 'selected' : '' ?>><?= $key['no_sambung'] . ' - ' . $key['nama_lengkap'] ?></option>
                                 <?php endforeach ?>
                             </select>
-                            <span class="help-block"><?= $validation->getError('id_pelanggan') ?></span>
+                            <span class="help-block"><?= $validation->getError('no_sambung') ?></span>
                         </div>
                         <button type="submit" class="btn btn-success">Simpan</button>
                     </form>
