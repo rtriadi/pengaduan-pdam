@@ -40,7 +40,8 @@
                             <select class="form-control" id="level" name="level">
                                 <option value="">[Pilih Level]</option>
                                 <option value="0" <?= old('level') == "0" ? 'selected' : '' ?>>Administrator</option>
-                                <option value="1" <?= old('level') == "1" ? 'selected' : '' ?>>Petugas</option>
+                                <option value="1" <?= old('level') == "1" ? 'selected' : '' ?>>Pimpinan</option>
+                                <option value="2" <?= old('level') == "2" ? 'selected' : '' ?>>Petugas</option>
                             </select>
                             <span class="help-block"><?= $validation->getError('jenis_kelamin') ?></span>
                         </div>

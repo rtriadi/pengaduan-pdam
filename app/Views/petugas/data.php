@@ -49,7 +49,7 @@
                                 <td><?= $data['no_hp_petugas'] ?></td>
                                 <td><?= $data['alamat_petugas'] ?></td>
                                 <td><?= $data['username'] ?></td>
-                                <td><?= $data['level'] == '0' ? '<label class="label label-success">Administrator</label>' : '<label class="label label-default">Petugas</label>' ?></td>
+                                <td><?= $data['level'] == '0' ? '<label class="label label-success">Administrator</label>' : ($data['level'] == '1' ? '<label class="label label-info">Pimpinan</label>' : '<label class="label label-default">Petugas</label>') ?></td>
                                 <td class="text-center">
                                     <a href="/petugas/edit/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-primary">Ubah</a>
                                     <a href="/petugas/delete/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>

@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\KategoriModel;
-use Endroid\QrCode\QrCode;
 
 class Kategori extends BaseController
 {

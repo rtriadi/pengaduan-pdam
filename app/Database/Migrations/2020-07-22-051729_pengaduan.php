@@ -15,6 +15,9 @@ class Pengaduan extends Migration
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE,
 			],
+			'tanggal_pengaduan' => [
+				'type' => 'DATE',
+			],
 			'no_sambung' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,

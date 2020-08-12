@@ -92,10 +92,9 @@ desired effect
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                                     <p>
                                         <?= session()->get('username') ?>
-                                        <small><?= session()->get('level') == 0 ? 'Administrator' : 'Pimpinan' ?></small>
+                                        <small><?= session()->get('level') == 0 ? 'Administrator' : (session()->get('level') == 1 ? 'Pimpinan' : 'Petugas') ?></small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -233,6 +232,13 @@ desired effect
                 'autoWidth': false
             })
         })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#search').on('click', function() {
+                window.open("<?= site_url() ?>/laporan/laporan?tanggal_awal=" + $('#tanggal_awal').val() + "&tanggal_akhir=" + $('#tanggal_akhir').val());
+            });
+        });
     </script>
 </body>
 

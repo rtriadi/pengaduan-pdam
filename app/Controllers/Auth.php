@@ -20,7 +20,7 @@ class Auth extends BaseController
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
             $user = $this->authModel->getUser($username);
-            if ($user->level == 0) {
+            if ($user->level == 0 || $user->level == 1) {
                 if ($user) {
                     if ($user->password !== sha1($password)) {
                         session()->setFlashdata('pesan', 'Password salah.');
