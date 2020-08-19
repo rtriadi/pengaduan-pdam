@@ -9,4 +9,9 @@ class Home extends BaseController
 		$data = ['title' => 'Home'];
 		return view('home/index', $data);
 	}
+
+	public function qrcode()
+	{
+		return view('home/qrcode');
+	}
 }

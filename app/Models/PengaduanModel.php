@@ -11,8 +11,11 @@ class PengaduanModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = ['no_sambung', 'nama', 'alamat', 'pengaduan', 'penyelesaian_pengaduan', 'id_petugas', 'status'];
 
-    public function get()
+    public function get($id_pengaduan)
     {
-        return $this->findAll();
+        if ($id_pengaduan == false) {
+            return $this->findAll();
+        }
+        return $this->where(['id_pengaduan' => $id_pengaduan])->first();
     }
 }
