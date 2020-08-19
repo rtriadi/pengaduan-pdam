@@ -69,7 +69,7 @@
                                             <img src="/uploads/pengaduan/pengaduan-<?= $data['id_pengaduan'] ?>.png" style="width: 100px">
                                             <br>
                                         </div>
-                                    <?php else : $data['penyelesaian_pengaduan'] ?>
+                                    <?php else : echo $data['penyelesaian_pengaduan'] . '<br> <small class="text-success"><b><i>diselesaikan oleh: ' . $data['nama_lengkap_petugas'] . '</i></b></small>' ?>
 
                                     <?php endif ?>
                                 </td>

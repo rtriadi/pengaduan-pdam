@@ -57,9 +57,15 @@ class Auth extends BaseController
     {
         $data = [
             'title' => 'Form Penyelesaian',
+            'pesan' => 'Pengaduan telah diselesaikan oleh petugas lain.',
             'pengaduan' => $this->pengaduanModel->get($id_pengaduan)
         ];
-        return view('index', $data);
+        $cek = $this->pengaduanModel->get($id_pengaduan);
+        if ($cek['status'] == 0) {
+            return view('index', $data);
+        } else {
+            return view('pesan', $data);
+        }
     }
 
     public function selesai()
@@ -76,8 +82,16 @@ class Auth extends BaseController
                 'status' => 1
             ]);
             echo '<script>alert("Penyelesaian Pengaduan telah berhasil.");</script>';
-            echo '<script>window.location.href="' . base_url('/auth/login/') . '";</script>';
+            echo '<script>window.location.href="' . base_url('/auth/pesan/') . '";</script>';
         }
+    }
+
+    public function pesan()
+    {
+        $data = [
+            'pesan' => 'Pengaduan telah diselesaikan.'
+        ];
+        return view('pesan', $data);
     }
 
     public function logout()
