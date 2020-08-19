@@ -17,7 +17,7 @@
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title"><?= $title ?></h3>
-                <a href="/petugas/create" class="btn btn-sm btn-success pull-right">Tambah</a>
+                <a href="<?= site_url() ?>/petugas/create" class="btn btn-sm btn-success pull-right">Tambah</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
@@ -51,8 +51,8 @@
                                 <td><?= $data['username'] ?></td>
                                 <td><?= $data['level'] == '0' ? '<label class="label label-success">Administrator</label>' : ($data['level'] == '1' ? '<label class="label label-info">Pimpinan</label>' : '<label class="label label-default">Petugas</label>') ?></td>
                                 <td class="text-center">
-                                    <a href="/petugas/edit/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-primary">Ubah</a>
-                                    <a href="/petugas/delete/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
+                                    <a href="<?= site_url() ?>/petugas/edit/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                    <a href="<?= site_url() ?>/petugas/delete/<?= $data['id_petugas'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>

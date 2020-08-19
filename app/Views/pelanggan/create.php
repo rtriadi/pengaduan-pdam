@@ -19,11 +19,11 @@
             <div class="box box-success">
                 <div class="box-header">
                     <h3 class="box-title"><?= $title ?></h3>
-                    <a href="/pelanggan" class="btn btn-sm btn-default pull-right">Kembali</a>
+                    <a href="<?= site_url() ?>/pelanggan" class="btn btn-sm btn-default pull-right">Kembali</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form role="form" action="/pelanggan/save" method="post">
+                    <form role="form" action="<?= site_url() ?>/pelanggan/save" method="post">
                         <?= csrf_field() ?>
                         <div class="form-group <?= ($validation->hasError('no_sambung') ? 'has-error' : '') ?>">
                             <label for="no_sambung">No. Sambung</label>

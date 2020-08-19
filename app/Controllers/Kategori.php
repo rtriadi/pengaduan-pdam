@@ -32,14 +32,14 @@ class Kategori extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/kategori')->withInput();
+            return redirect()->to(base_url() . '/kategori')->withInput();
         }
 
         $this->kategoriModel->save([
             'nama_kategori' => $this->request->getVar('nama_kategori')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-        return redirect()->to('/kategori');
+        return redirect()->to(base_url() . '/kategori');
     }
 
     public function update()
@@ -54,7 +54,7 @@ class Kategori extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/kategori')->withInput();
+            return redirect()->to(base_url() . '/kategori')->withInput();
         }
 
         $this->kategoriModel->save([
@@ -62,13 +62,13 @@ class Kategori extends BaseController
             'nama_kategori' => $this->request->getVar('nama_kategori')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
-        return redirect()->to('/kategori');
+        return redirect()->to(base_url() . '/kategori');
     }
 
     public function delete($id)
     {
         $this->kategoriModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
-        return redirect()->to('/kategori');
+        return redirect()->to(base_url() . '/kategori');
     }
 }

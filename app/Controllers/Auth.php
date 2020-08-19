@@ -18,7 +18,7 @@ class Auth extends BaseController
     public function login()
     {
         if (session()->has('isLoggedIn')) {
-            return redirect()->to('/home');
+            return redirect()->to(base_url('/home'));
         }
         if ($this->request->getPost()) {
             $username = $this->request->getVar('username');
@@ -28,7 +28,7 @@ class Auth extends BaseController
                 if ($user) {
                     if ($user->password !== sha1($password)) {
                         session()->setFlashdata('pesan', 'Password salah.');
-                        return redirect()->to('/auth/login');
+                        return redirect()->to(base_url('/auth/login'));
                     } else {
                         $sessData = [
                             'id_petugas' => $user->id_petugas,
@@ -38,15 +38,15 @@ class Auth extends BaseController
                             'isLoggedIn' => true
                         ];
                         session()->set($sessData);
-                        return redirect()->to('/home');
+                        return redirect()->to(base_url('home'));
                     }
                 } else {
                     session()->setFlashdata('pesan', 'Username tidak terdaftar.');
-                    return redirect()->to('/auth/login');
+                    return redirect()->to(base_url('/auth/login'));
                 }
             } else {
                 session()->setFlashdata('pesan', 'Anda bukan administrator.');
-                return redirect()->to('/auth/login');
+                return redirect()->to(base_url('/auth/login'));
             }
         } else {
             return view('login');
@@ -97,6 +97,6 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/auth/login');
+        return redirect()->to(base_url('/auth/login'));
     }
 }

@@ -66,7 +66,7 @@
                                             $qrCode = new Endroid\QrCode\QrCode($data['id_pengaduan']);
                                             $qrCode->writeFile('uploads/pengaduan/pengaduan-' . $data['id_pengaduan'] . '.png');
                                             ?>
-                                            <img src="/uploads/pengaduan/pengaduan-<?= $data['id_pengaduan'] ?>.png" style="width: 100px">
+                                            <img src="<?= site_url() ?>/uploads/pengaduan/pengaduan-<?= $data['id_pengaduan'] ?>.png" style="width: 100px">
                                             <br>
                                         </div>
                                     <?php else : echo $data['penyelesaian_pengaduan'] . '<br> <small class="text-success"><b><i>diselesaikan oleh: ' . $data['nama_lengkap_petugas'] . '</i></b></small>' ?>

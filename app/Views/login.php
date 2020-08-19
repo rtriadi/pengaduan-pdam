@@ -18,6 +18,9 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link href="<?= base_url() ?>/assets/webcam/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>/assets/webcam/css/style.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition login-page">
@@ -33,7 +36,7 @@
                     <?= session()->getFlashdata('pesan') ?>
                 </div>
             <?php endif ?>
-            <form action="/auth/login" method="post">
+            <form action="<?= site_url('/auth/login') ?>" method="post">
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" placeholder="Username" name="username">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -56,11 +59,62 @@
         <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
-
-    <!-- jQuery 3 -->
-    <script src="<?= base_url() ?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="<?= base_url() ?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <div class="container" id="QR-Code">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="navbar-form navbar-left">
+                    <h4>WebCodeCamJS.js Demonstration</h4>
+                </div>
+                <div class="navbar-form navbar-right">
+                    <select class="form-control" id="camera-select"></select>
+                    <div class="form-group">
+                        <input id="image-url" type="text" class="form-control" placeholder="Image url">
+                        <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
+                        <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
+                        <button title="Play" class="btn btn-success btn-sm" id="play" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-play"></span></button>
+                        <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
+                        <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body text-center">
+                <div class="col-md-6">
+                    <div class="well" style="position: relative;display: inline-block;">
+                        <canvas width="320" height="240" id="webcodecam-canvas"></canvas>
+                        <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="thumbnail" id="result">
+                        <div class="well" style="overflow: hidden;">
+                            <img width="320" height="240" id="scanned-img" src="">
+                        </div>
+                        <div class="caption">
+                            <h3>Scanned result</h3>
+                            <p id="scanned-QR"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/filereader.js"></script>
+        <!-- Using jquery version: -->
+        <!--
+            <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/jquery.js"></script>
+            <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/qrcodelib.js"></script>
+            <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/webcodecamjquery.js"></script>
+            <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/mainjquery.js"></script>
+        -->
+        <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/qrcodelib.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/webcodecamjs.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>/assets/webcam/js/main.js"></script>
+        <!-- jQuery 3 -->
+        <script src="<?= base_url() ?>/assets/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.7 -->
+        <script src="<?= base_url() ?>/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

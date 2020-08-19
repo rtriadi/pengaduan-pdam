@@ -41,7 +41,7 @@ class MeterPelanggan extends BaseController
         if ($validation->run($data, 'import') == FALSE) {
 
             session()->setFlashdata('errors', $validation->getErrors());
-            return redirect()->to(base_url('meterpelanggan'));
+            return redirect()->to(base_url() . '/meterpelanggan');
         } else {
 
             // ambil extension dari file excel
@@ -105,7 +105,7 @@ class MeterPelanggan extends BaseController
                 }
             }
             session()->setFlashdata('pesan', 'Insert = ' . $insert . ' Update = ' . $update);
-            return redirect()->to(base_url('meterpelanggan'));
+            return redirect()->to(base_url() . '/meterpelanggan');
         }
     }
 
@@ -141,7 +141,7 @@ class MeterPelanggan extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/meterpelanggan/create')->withInput();
+            return redirect()->to(base_url() . '/meterpelanggan/create')->withInput();
         }
 
         $this->meterPelangganModel->save([
@@ -150,7 +150,7 @@ class MeterPelanggan extends BaseController
             'no_sambung' => $this->request->getVar('no_sambung')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-        return redirect()->to('/meterpelanggan');
+        return redirect()->to(base_url() . '/meterpelanggan');
     }
 
     public function edit($id)
@@ -187,7 +187,7 @@ class MeterPelanggan extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/meterpelanggan/edit/' . $id)->withInput();
+            return redirect()->to(base_url() . '/meterpelanggan/edit/' . $id)->withInput();
         }
 
         $this->meterPelangganModel->save([
@@ -197,13 +197,13 @@ class MeterPelanggan extends BaseController
             'no_sambung' => $this->request->getVar('no_sambung')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
-        return redirect()->to('/meterpelanggan');
+        return redirect()->to(base_url() . '/meterpelanggan');
     }
 
     public function delete($id)
     {
         $this->meterPelangganModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
-        return redirect()->to('/meterpelanggan');
+        return redirect()->to(base_url() . '/meterpelanggan');
     }
 }

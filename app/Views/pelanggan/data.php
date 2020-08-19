@@ -17,7 +17,7 @@
         <div class="box box-success">
             <div class="box-header">
                 <h3 class="box-title"><?= $title ?></h3>
-                <a href="/pelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
+                <a href="<?= site_url() ?>/pelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
                 <button class="btn btn-sm btn-default pull-right" data-toggle="modal" data-target="#importExcel" style="margin-right: 10px;">Import Excel</button>
             </div>
             <div class="modal fade" id="importExcel">
@@ -28,7 +28,7 @@
                                 <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Import Excel Data Pelanggan</h4>
                         </div>
-                        <form role="form" action="/pelanggan/importExcel" method="post" enctype="multipart/form-data">
+                        <form role="form" action="<?= site_url() ?>/pelanggan/importExcel" method="post" enctype="multipart/form-data">
                             <?= csrf_field() ?>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -37,7 +37,7 @@
                                     <span class="help-block"></span>
                                 </div>
                                 <div class="form-group">
-                                    <a href="/uploads/formatImport/data_pelanggan.xlsx" target="_blank">Download format excel data pelanggan</a>
+                                    <a href="<?= site_url() ?>/uploads/formatImport/data_pelanggan.xlsx" target="_blank">Download format excel data pelanggan</a>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -85,8 +85,8 @@
                                 <td><?= $data['no_hp'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
                                 <td class="text-center">
-                                    <a href="/pelanggan/edit/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-primary">Ubah</a>
-                                    <a href="/pelanggan/delete/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
+                                    <a href="<?= site_url() ?>/pelanggan/edit/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                    <a href="<?= site_url() ?>/pelanggan/delete/<?= $data['id_pelanggan'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>

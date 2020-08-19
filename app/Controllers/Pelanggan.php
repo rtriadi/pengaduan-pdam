@@ -39,7 +39,7 @@ class Pelanggan extends BaseController
         if ($validation->run($data, 'import') == FALSE) {
 
             session()->setFlashdata('errors', $validation->getErrors());
-            return redirect()->to(base_url('pelanggan'));
+            return redirect()->to(base_url() . '/pelanggan');
         } else {
 
             // ambil extension dari file excel
@@ -110,7 +110,7 @@ class Pelanggan extends BaseController
                 }
             }
             session()->setFlashdata('pesan', 'Insert = ' . $insert . ' Update = ' . $update);
-            return redirect()->to(base_url('pelanggan'));
+            return redirect()->to(base_url() . '/pelanggan');
         }
     }
 
@@ -158,7 +158,7 @@ class Pelanggan extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/pelanggan/create')->withInput();
+            return redirect()->to(base_url() . '/pelanggan/create')->withInput();
         }
 
         $this->pelangganModel->save([
@@ -169,7 +169,7 @@ class Pelanggan extends BaseController
             'alamat' => $this->request->getVar('alamat')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-        return redirect()->to('/pelanggan');
+        return redirect()->to(base_url() . '/pelanggan');
     }
 
     public function edit($id_pelanggan)
@@ -218,7 +218,7 @@ class Pelanggan extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/pelanggan/edit/' . $id_pelanggan)->withInput();
+            return redirect()->to(base_url() . '/pelanggan/edit/' . $id_pelanggan)->withInput();
         }
 
         $this->pelangganModel->save([
@@ -230,13 +230,13 @@ class Pelanggan extends BaseController
             'alamat' => $this->request->getVar('alamat')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
-        return redirect()->to('/pelanggan');
+        return redirect()->to(base_url() . '/pelanggan');
     }
 
     public function delete($id)
     {
         $this->pelangganModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
-        return redirect()->to('/pelanggan');
+        return redirect()->to(base_url() . '/pelanggan');
     }
 }

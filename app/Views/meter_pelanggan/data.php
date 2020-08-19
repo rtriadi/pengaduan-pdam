@@ -18,7 +18,7 @@
             <div class="box box-success">
                 <div class="box-header">
                     <h3 class="box-title"><?= $title ?></h3>
-                    <a href="/meterpelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
+                    <a href="<?= site_url() ?>/meterpelanggan/create" class="btn btn-sm btn-success pull-right">Tambah</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
@@ -50,8 +50,8 @@
                                     <td><?= $data['meter'] ?></td>
                                     <td><?= $data['no_sambung'] . ' - ' . $data['nama_lengkap'] ?></td>
                                     <td class="text-center">
-                                        <a href="/meterpelanggan/edit/<?= $data['id'] ?>" class="btn btn-sm btn-primary">Ubah</a>
-                                        <a href="/meterpelanggan/delete/<?= $data['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
+                                        <a href="<?= site_url() ?>/meterpelanggan/edit/<?= $data['id'] ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                        <a href="<?= site_url() ?>/meterpelanggan/delete/<?= $data['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -69,14 +69,14 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form role="form" action="/meterpelanggan/importExcel" method="post" enctype="multipart/form-data">
+                    <form role="form" action="<?= site_url() ?>/meterpelanggan/importExcel" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fileexcel">Pilih Excel</label>
                             <input type="file" class="form-control" id="fileexcel" name="fileexcel" required>
                             <span class="help-block"></span>
                         </div>
                         <div class="form-group">
-                            <a href="/uploads/formatImport/data_meterpelanggan.xlsx" target="_blank">Download format excel data meter pelanggan</a>
+                            <a href="<?= site_url() ?>/uploads/formatImport/data_meterpelanggan.xlsx" target="_blank">Download format excel data meter pelanggan</a>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>

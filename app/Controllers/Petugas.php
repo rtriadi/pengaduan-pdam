@@ -75,7 +75,7 @@ class Petugas extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/petugas/create')->withInput();
+            return redirect()->to(base_url() . '/petugas/create')->withInput();
         }
 
         $this->petugasModel->save([
@@ -88,7 +88,7 @@ class Petugas extends BaseController
             'alamat_petugas' => $this->request->getVar('alamat_petugas')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
-        return redirect()->to('/petugas');
+        return redirect()->to(base_url() . '/petugas');
     }
 
     public function edit($id_petugas)
@@ -148,7 +148,7 @@ class Petugas extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/petugas/edit/' . $id_petugas)->withInput();
+            return redirect()->to(base_url() . '/petugas/edit/' . $id_petugas)->withInput();
         }
 
         $this->petugasModel->save([
@@ -162,13 +162,13 @@ class Petugas extends BaseController
             'alamat_petugas' => $this->request->getVar('alamat_petugas')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
-        return redirect()->to('/petugas');
+        return redirect()->to(base_url() . '/petugas');
     }
 
     public function delete($id)
     {
         $this->petugasModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
-        return redirect()->to('/petugas');
+        return redirect()->to(base_url() . '/petugas');
     }
 }

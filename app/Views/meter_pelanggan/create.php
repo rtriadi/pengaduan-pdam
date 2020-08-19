@@ -19,11 +19,11 @@
             <div class="box box-success">
                 <div class="box-header">
                     <h3 class="box-title"><?= $title ?></h3>
-                    <a href="/meterpelanggan" class="btn btn-sm btn-default pull-right">Kembali</a>
+                    <a href="<?= site_url() ?>/meterpelanggan" class="btn btn-sm btn-default pull-right">Kembali</a>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form role="form" action="/meterpelanggan/save" method="post">
+                    <form role="form" action="<?= site_url() ?>/meterpelanggan/save" method="post">
                         <?= csrf_field() ?>
                         <div class="form-group <?= ($validation->hasError('tanggal_meter') ? 'has-error' : '') ?>">
                             <label for="tanggal_meter">Tanggal Meter</label>

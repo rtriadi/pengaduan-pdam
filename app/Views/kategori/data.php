@@ -47,7 +47,7 @@
                                     <td><?= $data['nama_kategori'] ?></td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalKategori-edit<?= $data['id_kategori'] ?>">Ubah</button>
-                                        <a href="/kategori/delete/<?= $data['id_kategori'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data  ini?')">Hapus</a>
+                                        <a href="<?= site_url() ?>/kategori/delete/<?= $data['id_kategori'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data  ini?')">Hapus</a>
                                     </td>
                                     <div class="modal fade" id="modalKategori-edit<?= $data['id_kategori'] ?>">
                                         <div class="modal-dialog">
@@ -57,7 +57,7 @@
                                                         <span aria-hidden="true">&times;</span></button>
                                                     <h4 class="modal-title">Form Ubah Data</h4>
                                                 </div>
-                                                <form role="form" action="/kategori/update" method="post">
+                                                <form role="form" action="<?= site_url() ?>/kategori/update" method="post">
                                                     <?= csrf_field() ?>
                                                     <div class="modal-body">
                                                         <div class="form-group">
@@ -95,7 +95,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="/kategori/save" method="post">
+                <form role="form" action="<?= site_url() ?>/kategori/save" method="post">
                     <?= csrf_field() ?>
                     <div class="box-body">
                         <div class="form-group">
