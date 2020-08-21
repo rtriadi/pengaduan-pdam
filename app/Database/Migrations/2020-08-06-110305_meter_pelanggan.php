@@ -15,8 +15,13 @@ class MeterPelanggan extends Migration
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE,
 			],
-			'tanggal_meter' => [
-				'type' => 'DATE',
+			'bulan_meter' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+			],
+			'tahun_meter' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
 			],
 			'meter' => [
 				'type' => 'VARCHAR',

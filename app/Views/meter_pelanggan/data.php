@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th width="5%">No.</th>
-                                <th>Tanggal Meter</th>
+                                <th>Bulan-Tahun Meter</th>
                                 <th>Meter</th>
                                 <th>No Sambung - Nama Lengkap</th>
                                 <th width="20%">Aksi</th>
@@ -46,7 +46,7 @@
                             foreach ($meter_pelanggan as $data) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $data['tanggal_meter'] ?></td>
+                                    <td><?= $data['bulan_meter'] . ' - ' . $data['tahun_meter'] ?></td>
                                     <td><?= $data['meter'] ?></td>
                                     <td><?= $data['no_sambung'] . ' - ' . $data['nama_lengkap'] ?></td>
                                     <td class="text-center">

@@ -171,4 +171,14 @@ class Petugas extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->to(base_url() . '/petugas');
     }
+
+    public function change_password()
+    {
+        $this->petugasModel->save([
+            'id_petugas' => $this->request->getVar('id_petugas'),
+            'password' => sha1($this->request->getVar('password'))
+        ]);
+        echo '<script>alert("Password berhasil diubah.");</script>';
+        echo '<script>window.location.href="' . base_url('/home') . '";</script>';
+    }
 }

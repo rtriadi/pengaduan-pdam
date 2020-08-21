@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
+use App\Models\MeterPelangganModel;
+use App\Models\PelangganModel;
 use App\Models\PengaduanModel;
 use App\Models\PetugasModel;
 
@@ -11,6 +13,8 @@ class Auth extends BaseController
     public function __construct()
     {
         $this->authModel = new AuthModel();
+        $this->meterPelangganModel = new MeterPelangganModel();
+        $this->pelangganModel = new PelangganModel();
         $this->pengaduanModel = new PengaduanModel();
         $this->petugasModel = new PetugasModel();
     }
@@ -53,11 +57,48 @@ class Auth extends BaseController
         }
     }
 
+    public function qrcode()
+    {
+        return view('qrcode');
+    }
+
+    public function meter_pelanggan()
+    {
+        $data = [
+            'title' => 'Form Meter Pelanggan'
+        ];
+        return view('formMeter', $data);
+    }
+
+    public function simpan()
+    {
+        $cek1 = $this->pelangganModel->cekNoSambung($this->request->getVar('no_sambung'));
+        if ($cek1 == null) {
+            echo '<script>alert("No Sambung tidak ditemukan.");</script>';
+            echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+        } else {
+            $cek2 = $this->meterPelangganModel->cekNoSambung($this->request->getVar('bulan_meter'), $this->request->getVar('tahun_meter'), $this->request->getVar('no_sambung'));
+            if ($cek2 != null) {
+                echo '<script>alert("Meter pelanggan untuk bulan dan tahun ini sudah ada.");</script>';
+                echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+            } else {
+                $this->meterPelangganModel->save([
+                    'bulan_meter' => $this->request->getVar('bulan_meter'),
+                    'tahun_meter' => $this->request->getVar('tahun_meter'),
+                    'meter' => $this->request->getVar('meter'),
+                    'no_sambung' => $this->request->getVar('no_sambung')
+                ]);
+                echo '<script>alert("Meter pelanggan telah berhasil ditambahkan.");</script>';
+                echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+            }
+        }
+    }
+
     public function penyelesaian($id_pengaduan)
     {
         $data = [
             'title' => 'Form Penyelesaian',
-            'pesan' => 'Pengaduan telah diselesaikan oleh petugas lain.',
+            'pesan' => 'Pengaduan telah diselesaikan.',
             'pengaduan' => $this->pengaduanModel->get($id_pengaduan)
         ];
         $cek = $this->pengaduanModel->get($id_pengaduan);
@@ -82,7 +123,7 @@ class Auth extends BaseController
                 'status' => 1
             ]);
             echo '<script>alert("Penyelesaian Pengaduan telah berhasil.");</script>';
-            echo '<script>window.location.href="' . base_url('/auth/pesan/') . '";</script>';
+            echo '<script>window.location.href="' . base_url('/auth/pesan') . '";</script>';
         }
     }
 

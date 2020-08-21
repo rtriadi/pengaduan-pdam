@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper" style="background-image: url('<?= base_url() ?>/assets/penyelesaian/images/bg-registration-form-2.jpg');">
         <div class="inner">
-            <form action="/auth/selesai" method="post">
+            <form action="<?= base_url() ?>/auth/selesai" method="post">
                 <?= csrf_field() ?>
                 <h3>Form Penyelesaian</h3>
                 <div class="form-wrapper">

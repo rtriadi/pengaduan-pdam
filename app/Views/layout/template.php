@@ -179,16 +179,12 @@ desired effect
             <div class="tab-content">
                 <!-- Settings tab content -->
                 <div class="tab-pane active" id="control-sidebar-settings-tab">
-                    <form method="post">
+                    <form action="<?= site_url('/petugas/change_password') ?>" method="post">
                         <h3 class="control-sidebar-heading">Ganti Password</h3>
                         <div class="form-group">
                             <label class="control-sidebar-subheading">Password Baru</label>
+                            <input type="hidden" class="form-control" name="id_petugas" value="<?= session()->get('id_petugas') ?>">
                             <input type="text" class="form-control" name="password">
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">Konfirmasi Password</label>
-                            <input type="text" class="form-control" name="passconf">
                         </div>
                         <!-- /.form-group -->
                         <input type="submit" class="btn btn-sm btn-success">

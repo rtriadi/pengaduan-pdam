@@ -70,17 +70,19 @@ class MeterPelanggan extends BaseController
                 }
 
                 // get no_sambung from excel
-                $inserdata[$i]['tanggal_meter'] = $value[0];
-                $inserdata[$i]['meter'] = $value[1];
-                $inserdata[$i]['no_sambung'] = $value[2];
+                $inserdata[$i]['bulan_meter'] = $value[0];
+                $inserdata[$i]['tahun_meter'] = $value[1];
+                $inserdata[$i]['meter'] = $value[2];
+                $inserdata[$i]['no_sambung'] = $value[3];
                 $i++;
             }
 
             foreach ($inserdata as $dt) {
-                $cek = $this->meterPelangganModel->cekNoSambung($dt['tanggal_meter'], $dt['no_sambung']);
+                $cek = $this->meterPelangganModel->cekNoSambung($dt['bulan_meter'], $dt['tahun_meter'], $dt['no_sambung']);
                 if (count($cek) > 0) {
                     $data = [
-                        "tanggal_meter" => $dt['tanggal_meter'],
+                        "bulan_meter" => $dt['bulan_meter'],
+                        "tahun_meter" => $dt['tahun_meter'],
                         "meter" => $dt['meter'],
                         "no_sambung" => $dt['no_sambung']
                     ];
@@ -92,7 +94,8 @@ class MeterPelanggan extends BaseController
                     }
                 } else {
                     $data = [
-                        "tanggal_meter" => $dt['tanggal_meter'],
+                        "bulan_meter" => $dt['bulan_meter'],
+                        "tahun_meter" => $dt['tahun_meter'],
                         "meter" => $dt['meter'],
                         "no_sambung" => $dt['no_sambung']
                     ];
@@ -122,7 +125,13 @@ class MeterPelanggan extends BaseController
     public function save()
     {
         if (!$this->validate([
-            'tanggal_meter' => [
+            'bulan_meter' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                ]
+            ],
+            'tahun_meter' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -145,7 +154,8 @@ class MeterPelanggan extends BaseController
         }
 
         $this->meterPelangganModel->save([
-            'tanggal_meter' => $this->request->getVar('tanggal_meter'),
+            'bulan_meter' => $this->request->getVar('bulan_meter'),
+            'tahun_meter' => $this->request->getVar('tahun_meter'),
             'meter' => $this->request->getVar('meter'),
             'no_sambung' => $this->request->getVar('no_sambung')
         ]);
@@ -168,7 +178,13 @@ class MeterPelanggan extends BaseController
     {
         $id = $this->request->getVar('id');
         if (!$this->validate([
-            'tanggal_meter' => [
+            'bulan_meter' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                ]
+            ],
+            'tahun_meter' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -192,7 +208,8 @@ class MeterPelanggan extends BaseController
 
         $this->meterPelangganModel->save([
             'id' => $id,
-            'tanggal_meter' => $this->request->getVar('tanggal_meter'),
+            'bulan_meter' => $this->request->getVar('bulan_meter'),
+            'tahun_meter' => $this->request->getVar('tahun_meter'),
             'meter' => $this->request->getVar('meter'),
             'no_sambung' => $this->request->getVar('no_sambung')
         ]);

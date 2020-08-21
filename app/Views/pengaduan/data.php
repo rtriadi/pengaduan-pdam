@@ -69,8 +69,12 @@
                                             <img src="<?= site_url() ?>/uploads/pengaduan/pengaduan-<?= $data['id_pengaduan'] ?>.png" style="width: 100px">
                                             <br>
                                         </div>
-                                    <?php else : echo $data['penyelesaian_pengaduan'] . '<br> <small class="text-success"><b><i>diselesaikan oleh: ' . $data['nama_lengkap_petugas'] . '</i></b></small>' ?>
-
+                                    <?php else :
+                                        $builder = $this->db->table('petugas')->where('id_petugas', $data['id_petugas'])->get()->getResultArray();
+                                        foreach ($builder as $row) {
+                                            $nama_lengkap_petugas = $row['nama_lengkap_petugas'];
+                                        }
+                                        echo $data['penyelesaian_pengaduan'] . '<br> <small class="text-success"><b><i>diselesaikan oleh: ' . $nama_lengkap_petugas . '</i></b></small>' ?>
                                     <?php endif ?>
                                 </td>
                                 <td><?= $data['status'] == 0 ? '<label class="label label-danger">Belum Selesai</label>' : '<label class="label label-success">Selesai</label>' ?></td>
