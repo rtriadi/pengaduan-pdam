@@ -14,7 +14,7 @@
 <!-- Main content -->
 <section class="content container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header">
                     <h3 class="box-title"><?= $title ?></h3>
@@ -37,7 +37,9 @@
                                 <th width="5%">No.</th>
                                 <th>Bulan-Tahun Meter</th>
                                 <th>Meter</th>
+                                <th>Foto Meter</th>
                                 <th>No Sambung - Nama Lengkap</th>
+                                <th>Petugas</th>
                                 <th width="20%">Aksi</th>
                             </tr>
                         </thead>
@@ -47,8 +49,12 @@
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $data['bulan_meter'] . ' - ' . $data['tahun_meter'] ?></td>
-                                    <td><?= $data['meter'] ?></td>
+                                    <td>
+                                        <?= $data['meter'] ?>
+                                    </td>
+                                    <td><img src="<?= base_url('uploads/fotoMeter/' . $data['foto_meter']) ?>" width="100px" height="100px"></td>
                                     <td><?= $data['no_sambung'] . ' - ' . $data['nama_lengkap'] ?></td>
+                                    <td><?= $data['nama_lengkap_petugas'] ?></td>
                                     <td class="text-center">
                                         <a href="<?= site_url() ?>/meterpelanggan/edit/<?= $data['id'] ?>" class="btn btn-sm btn-primary">Ubah</a>
                                         <a href="<?= site_url() ?>/meterpelanggan/delete/<?= $data['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">Hapus</a>
@@ -62,13 +68,13 @@
             </div>
             <!-- /.box -->
         </div>
-        <div class="col-md-4">
-            <div class="box box-success">
-                <div class="box-header">
+        <!-- <div class="col-md-4">
+            <div class="box box-success"> -->
+        <!-- <div class="box-header">
                     <h3 class="box-title">Import Meter Pelanggan</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+                </div> -->
+        <!-- /.box-header -->
+        <!-- <div class="box-body">
                     <form role="form" action="<?= site_url() ?>/meterpelanggan/importExcel" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fileexcel">Pilih Excel</label>
@@ -80,11 +86,11 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
+                </div> -->
+        <!-- /.box-body -->
+        <!-- </div> -->
+        <!-- /.box -->
+        <!-- </div> -->
     </div>
 </section>
 <!-- /.content -->

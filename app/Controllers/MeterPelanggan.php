@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\MeterPelangganModel;
 use App\Models\PelangganModel;
+use App\Models\PetugasModel;
 
 class MeterPelanggan extends BaseController
 {
@@ -13,6 +14,7 @@ class MeterPelanggan extends BaseController
     {
         $this->meterPelangganModel = new MeterPelangganModel();
         $this->pelangganModel = new PelangganModel();
+        $this->petugasModel = new PetugasModel();
     }
 
     public function index()
@@ -116,7 +118,8 @@ class MeterPelanggan extends BaseController
     {
         $data = [
             'title' => 'Form Tambah Data',
-            'pelanggan' => $this->meterPelangganModel->get(),
+            'pelanggan' => $this->pelangganModel->get(),
+            'petugas' => $this->petugasModel->get(),
             'validation' => \Config\Services::validation()
         ];
         return view('meter_pelanggan/create', $data);
@@ -143,7 +146,22 @@ class MeterPelanggan extends BaseController
                     'required' => '{field} harus diisi.',
                 ]
             ],
+            'foto_meter' => [
+                'rules' => 'uploaded[foto_meter]|max_size[foto_meter,1024]|is_image[foto_meter]|mime_in[foto_meter,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => '{field} belum dipilih.',
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang anda pilih bukan gambar.',
+                    'mime_in' => 'Yang anda pilih bukan gambar.'
+                ]
+            ],
             'no_sambung' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                ]
+            ],
+            'id_petugas' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -153,11 +171,17 @@ class MeterPelanggan extends BaseController
             return redirect()->to(base_url() . '/meterpelanggan/create')->withInput();
         }
 
+        $fotoMeter = $this->request->getFile('foto_meter');
+        $namaFoto = $fotoMeter->getRandomName();
+        $fotoMeter->move('uploads/fotoMeter', $namaFoto);
+
         $this->meterPelangganModel->save([
             'bulan_meter' => $this->request->getVar('bulan_meter'),
             'tahun_meter' => $this->request->getVar('tahun_meter'),
             'meter' => $this->request->getVar('meter'),
-            'no_sambung' => $this->request->getVar('no_sambung')
+            'foto_meter' => $namaFoto,
+            'no_sambung' => $this->request->getVar('no_sambung'),
+            'id_petugas' => $this->request->getVar('id_petugas')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
         return redirect()->to(base_url() . '/meterpelanggan');
@@ -168,7 +192,8 @@ class MeterPelanggan extends BaseController
         $data = [
             'title' => 'Form Ubah Data',
             'meter_pelanggan' => $this->meterPelangganModel->get($id),
-            'pelanggan' => $this->meterPelangganModel->get(),
+            'pelanggan' => $this->pelangganModel->get(),
+            'petugas' => $this->petugasModel->get(),
             'validation' => \Config\Services::validation(),
         ];
         return view('meter_pelanggan/edit', $data);
@@ -196,7 +221,22 @@ class MeterPelanggan extends BaseController
                     'required' => '{field} harus diisi.',
                 ]
             ],
+            'foto_meter' => [
+                'rules' => 'uploaded[foto_meter]|max_size[foto_meter,1024]|is_image[foto_meter]|mime_in[foto_meter,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'uploaded' => '{field} belum dipilih.',
+                    'max_size' => 'Ukuran gambar terlalu besar.',
+                    'is_image' => 'Yang anda pilih bukan gambar.',
+                    'mime_in' => 'Yang anda pilih bukan gambar.'
+                ]
+            ],
             'no_sambung' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} harus diisi.',
+                ]
+            ],
+            'id_petugas' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => '{field} harus diisi.',
@@ -206,12 +246,19 @@ class MeterPelanggan extends BaseController
             return redirect()->to(base_url() . '/meterpelanggan/edit/' . $id)->withInput();
         }
 
+        $fotoMeter = $this->request->getFile('foto_meter');
+        $namaFoto = $fotoMeter->getRandomName();
+        $fotoMeter->move('uploads/fotoMeter', $namaFoto);
+        unlink('uploads/fotoMeter/' . $this->request->getVar('fotoLama'));
+
         $this->meterPelangganModel->save([
             'id' => $id,
             'bulan_meter' => $this->request->getVar('bulan_meter'),
             'tahun_meter' => $this->request->getVar('tahun_meter'),
             'meter' => $this->request->getVar('meter'),
-            'no_sambung' => $this->request->getVar('no_sambung')
+            'foto_meter' => $namaFoto,
+            'no_sambung' => $this->request->getVar('no_sambung'),
+            'id_petugas' => $this->request->getVar('id_petugas')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah.');
         return redirect()->to(base_url() . '/meterpelanggan');
@@ -219,6 +266,8 @@ class MeterPelanggan extends BaseController
 
     public function delete($id)
     {
+        $row = $this->meterPelangganModel->find($id);
+        unlink('uploads/fotoMeter/' . $row['foto_meter']);
         $this->meterPelangganModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
         return redirect()->to(base_url() . '/meterpelanggan');

@@ -27,9 +27,19 @@ class MeterPelanggan extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => 255,
 			],
+			'foto_meter' => [
+				'type' => 'VARCHAR',
+				'constraint' => 255,
+			],
 			'no_sambung' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
+			],
+			'id_petugas' => [
+				'type' => 'INT',
+				'constraint' => 11,
+				'unsigned' => TRUE,
+				'null' => TRUE,
 			],
 			'created_at' => [
 				'type' => 'DATETIME',

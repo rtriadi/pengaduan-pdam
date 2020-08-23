@@ -15,7 +15,7 @@
 <body>
     <div class="wrapper" style="background-image: url('<?= base_url() ?>/assets/penyelesaian/images/bg-registration-form-2.jpg');">
         <div class="inner">
-            <form action="<?= site_url() ?>/auth/simpan" method="post">
+            <form action="<?= site_url() ?>/auth/simpan" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <h3>Form Meter Pelanggan</h3>
                 <div class="form-wrapper">
@@ -46,6 +46,14 @@
                 <div class="form-wrapper">
                     <label for="">Meter</label>
                     <input type="text" class="form-control" name="meter" required>
+                </div>
+                <div class="form-wrapper">
+                    <label for="">Foto Meter</label>
+                    <input type="file" class="form-control" name="foto_meter" required>
+                </div>
+                <div class="form-wrapper">
+                    <label for="">Id Petugas</label>
+                    <input type="text" name="id_petugas" class="form-control" required>
                 </div>
                 <button type="submit" name="simpan">Simpan</button>
             </form>

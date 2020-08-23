@@ -82,14 +82,25 @@ class Auth extends BaseController
                 echo '<script>alert("Meter pelanggan untuk bulan dan tahun ini sudah ada.");</script>';
                 echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
             } else {
-                $this->meterPelangganModel->save([
-                    'bulan_meter' => $this->request->getVar('bulan_meter'),
-                    'tahun_meter' => $this->request->getVar('tahun_meter'),
-                    'meter' => $this->request->getVar('meter'),
-                    'no_sambung' => $this->request->getVar('no_sambung')
-                ]);
-                echo '<script>alert("Meter pelanggan telah berhasil ditambahkan.");</script>';
-                echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+                $cek3 = $this->petugasModel->get($this->request->getVar('id_petugas'));
+                if ($cek3 == null) {
+                    echo '<script>alert("Id Petugas tidak ditemukan.");</script>';
+                    echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+                } else {
+                    $fotoMeter = $this->request->getFile('foto_meter');
+                    $namaFoto = $fotoMeter->getRandomName();
+                    $fotoMeter->move('uploads/fotoMeter', $namaFoto);
+                    $this->meterPelangganModel->save([
+                        'bulan_meter' => $this->request->getVar('bulan_meter'),
+                        'tahun_meter' => $this->request->getVar('tahun_meter'),
+                        'meter' => $this->request->getVar('meter'),
+                        'foto_meter' => $namaFoto,
+                        'no_sambung' => $this->request->getVar('no_sambung'),
+                        'id_petugas' => $this->request->getVar('id_petugas')
+                    ]);
+                    echo '<script>alert("Meter pelanggan telah berhasil ditambahkan.");</script>';
+                    echo '<script>window.location.href="' . base_url('/auth/meter_pelanggan') . '";</script>';
+                }
             }
         }
     }
